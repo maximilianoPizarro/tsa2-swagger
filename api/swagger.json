@@ -1,0 +1,145 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "TSA2",
+    "license": {
+      "name": "MIT",
+      "url": "https://gitlab.bfa.ar/blockchain/tsa2/blob/master/LICENSE"
+    }
+  },
+  "host": "tsa2-test.buenosaires.gob.ar",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "TSA NG",
+      "description": "API for consume Blockchain Federal Argentina"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Stamp": {
+      "post": {
+        "tags": [
+          "Stamp"
+        ],
+        "description": "Add new hash in Blockchain Federal Argentina",
+        "parameters": [
+          {
+            "name": "hashes",
+            "in": "body",
+            "description": "Hashes that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Hash"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        }
+      }
+    },
+    "/verify/{hash}": {
+      "parameters": [
+        {
+          "name": "hash",
+          "in": "path",
+          "required": true,
+          "description": "Verify hash",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Verify"
+        ],
+        "summary": "Get hash",
+        "responses": {
+          "200": {
+            "description": "Hash stamped",
+            "schema": {
+              "$ref": "#/definitions/Stamped"
+            }
+          }
+        }
+      }
+    },
+    "/wait1block": {
+      "get": {
+        "tags": [
+          "Wait One Block"
+        ],
+        "summary": "Get one block",
+        "responses": {
+          "200": {
+            "description": "Block number",
+            "schema": {
+              "$ref": "#/definitions/OneBlock"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Hash": {
+      "properties": {
+        "hashes": {
+          "type": "array",
+          "items":{
+            "type": "string"
+           }     
+        }
+      }
+    },
+    "Stamped": {
+      "type": "object",
+      "properties": {        
+        "stamped":{
+        "type":"boolean"
+        },
+        "stamps": {
+          "type": "array",
+          "items":{
+            "type":"object",
+            "properties":{
+                "whostamped":{
+                "type":"string"
+                },
+            "blocknumber":{
+              "type":"string"
+              },
+            "blocktimestamp":{
+              "type":"number"
+              }
+            }
+           }     
+        }
+      }
+    },
+    "OneBlock":{
+      "type": "object",
+      "properties": {        
+        "stamped":{
+          "type":"boolean"
+        },
+        "blocknumber": {
+          "type":"number"
+        }
+      }
+    }
+  }
+}
