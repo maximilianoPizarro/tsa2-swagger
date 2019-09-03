@@ -18,8 +18,17 @@ Install
 ```
         "host": "localhost"
 ```
-3. Run index.js
+3. Download package
+```
+        npm install
+```
+4. Run index.js
 ```
         npm run serve
 ```
+5. Swagger
+```
+        url/v2-docs
+```
+
         
