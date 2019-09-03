@@ -28,7 +28,7 @@ Install
 ```
 5. Swagger
 ```
-        url/v2-docs
+        url/api-docs
 ```
 
         
