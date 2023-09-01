@@ -8,7 +8,7 @@
       "url": "https://gitlab.bfa.ar/blockchain/tsa2/blob/master/LICENSE"
     }
   },
-  "host": "tsa2-test.buenosaires.gob.ar",
+  "host": "tsa2.buenosaires.gob.ar",
   "basePath": "/",
   "tags": [
     {
@@ -38,7 +38,14 @@
             "in": "body",
             "description": "Hashes that we want to create",
             "schema": {
-              "$ref": "#/definitions/Hash"
+              "properties": {
+                "hashes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
             }
           }
         ],
@@ -71,7 +78,29 @@
           "200": {
             "description": "Hash stamped",
             "schema": {
-              "$ref": "#/definitions/Stamped"
+              "type": "object",
+              "properties": {
+                "stamped": {
+                  "type": "boolean"
+                },
+                "stamps": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "whostamped": {
+                        "type": "string"
+                      },
+                      "blocknumber": {
+                        "type": "string"
+                      },
+                      "blocktimestamp": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -87,7 +116,15 @@
           "200": {
             "description": "Block number",
             "schema": {
-              "$ref": "#/definitions/OneBlock"
+              "type": "object",
+              "properties": {
+                "stamped": {
+                  "type": "boolean"
+                },
+                "blocknumber": {
+                  "type": "number"
+                }
+              }
             }
           }
         }
@@ -99,45 +136,45 @@
       "properties": {
         "hashes": {
           "type": "array",
-          "items":{
+          "items": {
             "type": "string"
-           }     
+          }
         }
       }
     },
     "Stamped": {
       "type": "object",
-      "properties": {        
-        "stamped":{
-        "type":"boolean"
+      "properties": {
+        "stamped": {
+          "type": "boolean"
         },
         "stamps": {
           "type": "array",
-          "items":{
-            "type":"object",
-            "properties":{
-                "whostamped":{
-                "type":"string"
-                },
-            "blocknumber":{
-              "type":"string"
+          "items": {
+            "type": "object",
+            "properties": {
+              "whostamped": {
+                "type": "string"
               },
-            "blocktimestamp":{
-              "type":"number"
+              "blocknumber": {
+                "type": "string"
+              },
+              "blocktimestamp": {
+                "type": "number"
               }
             }
-           }     
+          }
         }
       }
     },
-    "OneBlock":{
+    "OneBlock": {
       "type": "object",
-      "properties": {        
-        "stamped":{
-          "type":"boolean"
+      "properties": {
+        "stamped": {
+          "type": "boolean"
         },
         "blocknumber": {
-          "type":"number"
+          "type": "number"
         }
       }
     }

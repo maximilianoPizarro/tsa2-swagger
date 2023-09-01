@@ -35,7 +35,7 @@ if (process.env.API_USER && process.env.API_PASS) {
  * Server port
  */
 
-let port = process.env.PORT ? process.env.PORT : 3080;
+let port = process.env.PORT ? process.env.PORT : 3000;
 
 app.listen(port, () => console.log(`TSA2 SWAGGER corriendo en ${port}!`));
 
@@ -43,5 +43,7 @@ app.listen(port, () => console.log(`TSA2 SWAGGER corriendo en ${port}!`));
 /**
  * Swagger
  */
-var swaggerUi = require('swagger-ui-express'),swaggerDocument = require(process.env.SWAGGER_PATH);
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
